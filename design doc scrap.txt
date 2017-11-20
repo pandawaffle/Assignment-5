@@ -1,0 +1,146 @@
+design doc scrap
+
+
+
+
+
+Title will be acquired from acquired from the argument vector, while body will be acquired from an the file contents. When body is acquired its contents will be checked for bad characters.
+
+I anticipate the most difficulty will arise with the implementation of the base 27 vector and creating the 0-Vector. We have not covered implementing integers other than base 10 in lab.
+The compile script may also provide challenge, as I have never looked under the hood of one before. Ideally all I would need to do cannabalize an existing script and change the file targets.
+
+
+(acquired from argv) 
+(acquired from infile)
+
+I'll need to download a few example files to test my approach.
+Using DNA.h as inspiration, I will make getTitle and getBody functions.
+The process will work like this "lang.txt" gets seperated into title
+
+Read via infile (removes newlines) then check for bad characters like in DNA.cpp's ATCGN check in DNA using "if (ch==' ' || ch=='a' || ch=='b'...".
+Stores the entire output into a string called body.
+I will refer to ' ' as SPACE in this document.
+
+string title = argv[];
+
+
+Using base 27 a vector of trigram frequencies can be constructed for each lang object.
+This is the real meat of the program. I want to use an approach I could not make work in Assignment 3 in the codon reader.
+I want to build a string called trigram by adding together 3 smaller strings of length 1, each being a position in the original string.
+	(This is opposed to the substring approach I used in Assignment 3)
+This trigram would then be handed to the trigram frequency helper-function that actually makes the frequency vector
+	
+for i = 0; i < i< (int) (((body.length()/3)*3) ; i++){
+	trigram = body[i] + body[i+1] + body[i+2];
+	trigram_frequency(trigram);
+	trigram = "";
+
+this will ignore the last two trigrams.
+
+if trigram[i]=='a'	
+
+I designed this program from the end to the beggening.
+
+
+
+#Trigram frequency vector 
+A vector of trigram frequencies (tri_freq) can be constructed for each lang object. Its values at each position will be base 10 (int), but its positions will be base 27.
+	Let's call those positons tri_freq[XYZ].
+The end goal is to increment a position on the frequency vector by 1 when it appears.
+Working backwards, I now need to make XYZ. In the lecture example hexidecimal (base 16) was represented by 0-9 and a-f. 
+I will need to make a translate_27 helper-function which, to reduce the amount of code I would need to write, would change *r-z & SPACE equal to 0-9. That way a-p can stay a-p.
+	*q is the 17th letter of the alphabet, so r-z are the remaining 9 letters and SPACE makes 27 total.
+A 3-character string 'trigram_s' would be recast as an intermediate null 'trigram_n' then recast as the three-digit base 27 number 'trigram_#'.
+	I believe recasting as null will avoid errors.
+Continuing to work backwards, I now need to get trigrams out of the body string.
+
+#Trigrams
+I want to use an approach I could not make work in Assignment 3 in the codon reader.
+I want to build a string called trigram by adding together 3 smaller strings of length 1, each being a position in the original string.
+	(This is opposed to the substring approach I used in Assignment 3)
+	
+for i = 0; i < i< (int) (((body.length()/3)*3) ; i++){
+	trigram_s = body[i] + body[i+1] + body[i+2];
+	trigram_s = translate_27(trigram_s);
+	// Do things with trigram_s;
+	trigram_s = "";
+
+This will ignore the last two trigrams, which would be incomplete.
+
+
+
+Will tri_freq[001] be read the same as tri_freq[1]?
+	
+
+The 0-vector will have to be procedurally created.
+vector<base_27> tri_vec_0;
+	for (i=a; i<='qqq'; i++;) 
+	tri_vec_0.pushback(i)
+In the lecture example hexidecimal (base 16) was represented by 0-9 and a-f. I want to construct a base 27 integer which is directly represented by a-z and ' '.
+	If this is not possible I will need to make a translate_27 helper-function which sets a = 1, b = 2 etc.
+I could then build a trigram string made of 3-letter increments 'trigram_s', then recast that string as an intermediate null 'trigram_n', then recast it as the three-digit base 27 number 'trigram_#'.
+Then I will increment tri_vec[trigram_#] by 1, clear all trigram variables, and repeat.
+
+
+getTri
+
+The cosine similarity function is a simple plug & chug using a for-loop. I designed this code in class the day it was presented:		
+		for(i=0; i=(n-1); i++){
+			sum_AB += (A[i])*(B[i]);
+			sum_A^2 += (A[i])*(A[i]);
+			sum_B^2 += (B[i])*(B[i]);
+		}
+		cos_sim = (sum_AB / (sqrt(sum_A^2)*sqrt(sum_B^2)));
+	return cos_sim; 
+I'll be sure to cast cos_sim as a double.
+n-1 should be 26, if I understand it correctly.
+I'll need to design a seperate piece of code to deal with the special 0 vector problem discussed in class.
+
+the cos_sim function will have be called between every training file and the test file
+
+Early in lecture we designed a function called "findmax" that used a 'candidate' and a 'guess' to compare all elements in array against one another to find the largest number.
+I will use the same approach to compare cosine similarity coeffecients via using getCos on each language object.
+	I will have to be careful to design the training object for-loop to cycle up through argc-1 so that it does not include the cos_sim of the test object & itself in its findmax function.
+Output after maximum cosine similarity selection will be simple, because I can output "guess.getTitle()".
+
+
+The test lang object will be made first, as I will need its frequency vector for computing the cosine similiarity values for the other objects.
+
+I'll be sure to us argc
+
+
+
+
+ex) english.getCos() will yield the cosine similarity of the test object and english.
+	
+
+#Function glossary
+eg. 'getTitle' & what it does
+
+main() to test the program
+
+files needed
+main.cpp
+turtles.h
+
+#libraries needed
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <cstdlib>
+#include "lang.h"
+using namespace std;
+
+
+compile script
+
+will need to compile files x, y, z
+
+
+
+This will not be hard if when making my base 27 system I can define that 0 is represented by 'a', 1 is represented by 'b' etc.,
+because then I could just convert a string of trigrams directly into a base 27 int.
+	In the lecture example hexidecimal (base 16) was represented by 0-9 and a-f. I would need to figure out how to change that to make this possible.
+		If this is too difficult, I will simply use a translate function which sets a=0, b=1 etc.
