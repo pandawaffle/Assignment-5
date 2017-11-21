@@ -126,6 +126,14 @@ double Lang::cosine_similarity(Lang training, Lang test){
 	vector<int> test_vec = test.getTri_vec();
 																			//int training_vec = ...  ***
 	double cos_sim;
+	if training.getEmpty_body()=0){
+		cos_sim = 0.0;
+		return cos_sim;														//will this work to end prgm
+	}
+	if test.getEmpty_body()=0){
+		cos_sim = 0.0;
+		return cos_sim;														//will this work to end prgm
+	}
 	for (i=0; i=19682; i++){
 		sum_AB += (training_vec_vec[i])*(test_vec[i]);
 		sum_A^2 += (training_vec[i])*(training_vec[i]);

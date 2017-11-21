@@ -25,16 +25,19 @@ This object will be defined in a Lang.h file, along with other functions that wi
 	Starter code for these files will be created by using find & replace on DNA.h and DNA.cpp to replace several key terms*.
 The test lang object will be made first, as its frequency vector will be needed for computing the cosine similiarity values of the other objects.
 Each object will have 4 properties: title, body, empty-body flag, and trigram frequency vector (tri_freq). Each of these will be accessible with a getter function.
-Trigrams will be made from the body of each object. Each time a trigram appears that object's trigram frequency vector for that specific trigram will be incremented by 1.
-The trigram frequency vector will be a vector of base 10 integers, but the positions of the vector will be represented using a 3-digit, base 27 number to represent each possible trigram.
-A '0-Vector' will be procedurally generated for the purposes of incrementation.
+The trigram frequency of each object will be representeted by a vector of ints. The total possible trigram possibilities is 27^3 or 19683.
+	The position for each possible trigram can be though of as a 3-digit, base27 number.
+	A 0-vector will be made that has 0 for all of these possible trigrams/positions.
+The letters in each trigram will be passed individuallys to a translate function that turns them into integers 0-26.
+	These values will then be multiplied by their appropriate "place" in the 3-digit, base27 vector (*27^2, *27^1, *27^0) and summed.
+	When a trigram is converted to this sum, the position on the trigram vector equal to that sum will be incremented by 1, in order to record the frequencies of each trigram.
 Using the function provided in the requirements document the cosine similiarity between a training object and the test object will be calculated.
 	If the object was flagged to have an empty body the cosine similarity will automatically be set to 0.
 	This function will be abstracted so as to take 2 language objects and return their cosine similiarty.
-The training object with the highest cosine similarity value will be our final result. To search for this a cannabilization of the findmax.cpp function provided in lecture will be used.
+The training object with the highest cosine similarity value will be our final result. To search for this a cannabilization of the findmax.cpp function provided in lecture 2 will be used.
 	This function will be passed a vector of Lang objects created by the main file.
 	The cosine similiarity between each object in the vector and the test file will be calculated by calling the cosine similarity function.
-	It will be very simple to output the title of the most similar file using a the 'getTitle' function.
+	It will be very simple to output the title of the most similar file by using a the 'getTitle' function.
 My approach will be tested and developed using example ASCII language files and the main function.
 
 *"DNA" with "Lang", "header" with "title", and "sequence" with "body".
@@ -60,7 +63,7 @@ My approach will be tested and developed using example ASCII language files and 
 	vector<int> Lang::getTri_freq()
 	
 /* 0-Vector Builder (Helper Function): Generates a vector of all possible trigrams with 0 for each frequency */
-	vector<int> Lang::0_vector();
+	vector<int> 0_vec();
 	
 /* Trigram Vector Builder: Starts with 0-Vector, but adds frequency to each trigram as it appears */
 	vector<int> Lang::trigram_vector(Lang langauge);
@@ -69,7 +72,7 @@ My approach will be tested and developed using example ASCII language files and 
 	translate_27(char letter)
 	
 /* Cosine Similarity Calculator: After checking if the object was flagged to have an empty body, calculates the similarity between the training object and the test object */
-	double Lang::cos_sim(Lang langauge1, Lang langauge2)
+	double Lang::cos_sim(Lang training, Lang test)
 	
 /* Find Maximum Similiarity: Compares the cosine similarities of each training object and then returns the title of the highest */
 	Lang Lang::max_sim(vector<Lang> training_all, Lang test)
