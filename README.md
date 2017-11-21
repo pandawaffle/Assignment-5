@@ -59,14 +59,14 @@ My approach will be tested and developed using example ASCII language files and 
 	bool Lang::getEmpty()
 	vector<int> Lang::getTri_freq()
 	
-/* 0-Vector Builder: Generates a vector of all possible trigrams with 0 for each frequency */
+/* 0-Vector Builder (Helper Function): Generates a vector of all possible trigrams with 0 for each frequency */
 	vector<int> Lang::0_vector();
 	
 /* Trigram Vector Builder: Starts with 0-Vector, but adds frequency to each trigram as it appears */
 	vector<int> Lang::trigram_vector(Lang langauge);
 	
-/* Roman Alphabet to Base 27 Translator: Assigns values as needed to code Roman Alphabet letters and SPACE into base 27 characters */
-	translate_27(string trigram)
+/* Roman Alphabet to Base 27 Translator (Helper Function): Assigns values as needed to code Roman Alphabet letters and SPACE into base 27 characters */
+	translate_27(char letter)
 	
 /* Cosine Similarity Calculator: After checking if the object was flagged to have an empty body, calculates the similarity between the training object and the test object */
 	double Lang::cos_sim(Lang langauge1, Lang langauge2)
