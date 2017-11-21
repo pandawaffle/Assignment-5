@@ -1,0 +1,36 @@
+commit 38ec9ce0dd8b7334be7d7e7c4c67737fa8a4609e
+Author: Unknown <insane.dennis@gmail.com>
+Date:   Mon Nov 20 20:54:46 2017 -0500
+
+    Grammar edits
+
+commit 538a75c5ebb5913026dac5ed1614c9cbee99db0c
+Author: Unknown <insane.dennis@gmail.com>
+Date:   Mon Nov 20 20:53:43 2017 -0500
+
+    I'm almost done...
+    
+    I visited the TA office hours and they helped set me straight on my approach the base 27 concept, as well as numerous syntax errors, a rough draft of a compile script and file passing.
+    I would say I am 90% done as of now. I need to test compiling as well as scan for errors, but I have writen every single function. I will actually have to work backwards to make milestone 1 work.
+
+commit 093725e381a1885ed3b1704615c3d031c72dbe5b
+Author: Unknown <insane.dennis@gmail.com>
+Date:   Mon Nov 20 17:19:31 2017 -0500
+
+    Pasted in my design doc to readme
+    
+    That would be important...
+
+commit 2efdfdc8b8f5b00e02db583d6a2d5c666fec68de
+Author: Unknown <insane.dennis@gmail.com>
+Date:   Mon Nov 20 17:17:57 2017 -0500
+
+    Added in all of the files I have been working on
+    
+    It's a mess. I need to consildate the work I have been doing into lang.cpp, lang.h and one scrap file.
+
+commit d870970c4fda7f3af751bb48a250e6d6843bdd84
+Author: Unknown <insane.dennis@gmail.com>
+Date:   Mon Nov 20 14:15:37 2017 -0500
+
+    Initial commit
